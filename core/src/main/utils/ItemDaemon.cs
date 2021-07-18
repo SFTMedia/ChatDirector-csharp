@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 namespace ChatDirector.core
 {
     public abstract class ItemDaemon : IDaemon

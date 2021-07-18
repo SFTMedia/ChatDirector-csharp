@@ -1,7 +1,6 @@
 using System;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
-
 namespace ChatDirector.core
 {
     public class EchoItem : IItem, IYamlConvertible
@@ -15,12 +14,10 @@ namespace ChatDirector.core
         {
             return new Context(ChatDirector.format(format, context));
         }
-
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
             this.format = (string)nestedObjectDeserializer(typeof(string));
         }
-
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
             nestedObjectSerializer(this.format);

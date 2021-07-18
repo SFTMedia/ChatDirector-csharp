@@ -1,5 +1,4 @@
 using System;
-
 namespace ChatDirector.core
 {
     public class ChainWorker

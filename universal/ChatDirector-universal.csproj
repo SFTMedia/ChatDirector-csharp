@@ -1,9 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\core\ChatDirector-core.csproj" />
+    <ProjectReference Include="..\console\ChatDirector-console.csproj" />
+    <ProjectReference Include="..\extra\ChatDirector-extra.csproj" />
   </ItemGroup>
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <!--<OutputType>Exe</OutputType>-->
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 </Project>

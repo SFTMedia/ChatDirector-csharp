@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 using YamlDotNet.Core.Events;
-
 namespace ChatDirector.core
 {
     public class Chain : IValid, IYamlConvertible
@@ -85,7 +84,6 @@ namespace ChatDirector.core
         {
             runAsync(items[0], context);
         }
-
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
             Configuration config = new Configuration();
@@ -117,7 +115,6 @@ namespace ChatDirector.core
             }
             parser.Consume<SequenceEnd>();
         }
-
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
             throw new NotImplementedException();

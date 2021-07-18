@@ -2,7 +2,6 @@ using ChatDirector.core;
 using System;
 using System.Threading;
 using System.IO;
-
 namespace ChatDirector.console
 {
     public class ChatDirectorConsole
@@ -31,7 +30,7 @@ namespace ChatDirector.console
                 new Thread(new TimedLoad().run).Start();
             }
             Console.WriteLine("Finished Loading");
-            String line;
+            string line;
             while (true)
             {
                 Console.Write("ChatDirector > ");

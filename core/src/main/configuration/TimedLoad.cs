@@ -1,6 +1,5 @@
 using System.Threading;
 using System;
-
 namespace ChatDirector.core
 {
     public class TimedLoad

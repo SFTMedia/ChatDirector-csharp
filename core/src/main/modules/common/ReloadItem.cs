@@ -1,8 +1,6 @@
 using System.Threading;
-
 namespace ChatDirector.core
 {
-
     public class ReloadItem : IItem
     {
         public bool isValid()

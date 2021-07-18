@@ -4,7 +4,6 @@ using YamlDotNet.Serialization;
 using System.Collections.Generic;
 using System.Linq;
 using YamlDotNet.Core.Events;
-
 namespace ChatDirector.core
 {
     public class Configuration : IConfiguration, IYamlConvertible
@@ -26,11 +25,9 @@ namespace ChatDirector.core
          * better solution.
          */
         static Dictionary<IItem, Chain> items = new Dictionary<IItem, Chain>();
-
         private IEnumerable<Type> getModuleTypes()
         {
             // https://stackoverflow.com/questions/720157/finding-all-classes-with-a-particular-attribute
-
             // This will take awhile to run especially if many classes are already loaded.
             return from a in AppDomain.CurrentDomain.GetAssemblies()
                    from t in a.GetTypes()
@@ -47,7 +44,6 @@ namespace ChatDirector.core
             }
             return modules;
         }
-
         public Configuration()
         {
             modules = createModules(getModuleTypes());
@@ -134,7 +130,6 @@ namespace ChatDirector.core
             }
             return true;
         }
-
         public Type getItemClass(string itemType, IEnumerable<IModule> inputModules)
         {
             foreach (IModule module in inputModules)
@@ -162,7 +157,7 @@ namespace ChatDirector.core
         {
             return getItemClass(itemType, modules);
         }
-        public IModule getModule(IModule class1)
+        public IModule getModule(Type class1)
         {
             foreach (IModule module in modules)
             {
@@ -222,32 +217,29 @@ namespace ChatDirector.core
         {
             items.Add(item, chain);
         }
-
         public Dictionary<string, Chain> getChains()
         {
             return this.chains;
         }
-
         public bool isDebug()
         {
             return this.debug;
         }
-
         public bool isTesting()
         {
             return false;
         }
-
         public List<IModule> getModules()
         {
             return this.modules;
         }
-
+        public Dictionary<string,Dictionary<string,string>> getModuleData() {
+            return this.moduleData;
+        }
         public IEnumerable<ILoadable> getDaemons()
         {
             return daemons.Values;
         }
-
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
             ChatDirector.setConfigStaging(this);
@@ -284,7 +276,6 @@ namespace ChatDirector.core
             }
             parser.Consume<MappingEnd>();
         }
-
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
             throw new NotImplementedException();

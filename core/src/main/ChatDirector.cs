@@ -3,7 +3,6 @@ using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using System;
 using System.Collections.Generic;
-
 namespace ChatDirector.core
 {
     public class ChatDirector
@@ -155,7 +154,7 @@ namespace ChatDirector.core
         {
             return instance;
         }
-        public IModule getModule(IModule class1)
+        public IModule getModule(Type class1)
         {
             return config.getModule(class1);
         }

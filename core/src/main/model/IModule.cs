@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-
 namespace ChatDirector.core
 {
     public interface IModule : ILoadable, IValid

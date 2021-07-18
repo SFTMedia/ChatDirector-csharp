@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 namespace ChatDirector.core
 {
     public class Context : Dictionary<string, string>

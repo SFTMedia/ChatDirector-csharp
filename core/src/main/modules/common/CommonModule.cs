@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 namespace ChatDirector.core
 {
     public class CommonModule : IModule
@@ -11,7 +10,6 @@ namespace ChatDirector.core
             string[] temp = { "pass", "stop", "halt", "break", "echo", "reload" };
             return new List<string>(temp);
         }
-
         public Context getContext(object obj)
         {
             return new Context();
@@ -28,7 +26,6 @@ namespace ChatDirector.core
         {
             return true;
         }
-
         public Type getItemClass(string type)
         {
             switch (type)
