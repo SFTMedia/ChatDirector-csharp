@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
+using YamlDotNet.Core.Events;
 
 namespace ChatDirector.core
 {
     public class Chain : IValid, IYamlConvertible
     {
         List<IItem> items = new List<IItem>();
-        //@JsonIgnore
+        [YamlIgnore]
         bool invalidItem;
+        public Chain() {}
         public Chain(IEnumerable<IItem> items)
         {
             foreach (IItem item in items)
@@ -86,8 +88,34 @@ namespace ChatDirector.core
 
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
-            // TODO: implement this
-            throw new NotImplementedException();
+            Configuration config = new Configuration();
+            parser.Consume<SequenceStart>();
+            while (parser.Current.GetType()!=typeof(SequenceEnd)) {
+                IItem item;
+                if (parser.Current.GetType()==typeof(MappingStart)) {
+                    parser.Consume<MappingStart>();
+                    var itemName = parser.Consume<Scalar>().Value;
+                    item = (IItem)nestedObjectDeserializer(ChatDirector.getConfigStaging().getItemClass(itemName));
+                    parser.Consume<MappingEnd>();
+                } else {
+                    var itemName = parser.Consume<Scalar>().Value;
+                    var itemType = ChatDirector.getConfigStaging().getItemClass(itemName);
+                    if (itemType != null ) {
+                        item = (IItem)Activator.CreateInstance(itemType);
+                    } else {
+                        this.setInvalidItem();
+                        throw new Exception("Item of type "+itemName+" not found.");
+                    }
+                }
+                this.addItem(item);
+            }
+            while(items.Contains(null)){
+                items.Remove(null);
+            }
+            if(items.Count==0) {
+                throw new Exception("No items parsed in chain");
+            }
+            parser.Consume<SequenceEnd>();
         }
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)

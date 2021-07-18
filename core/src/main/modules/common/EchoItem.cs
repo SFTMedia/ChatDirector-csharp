@@ -7,10 +7,6 @@ namespace ChatDirector.core
     public class EchoItem : IItem, IYamlConvertible
     {
         string format;
-        public EchoItem(string format)
-        {
-            this.format = format;
-        }
         public bool isValid()
         {
             return format != null;

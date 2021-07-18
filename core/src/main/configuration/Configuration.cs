@@ -3,6 +3,7 @@ using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 using System.Collections.Generic;
 using System.Linq;
+using YamlDotNet.Core.Events;
 
 namespace ChatDirector.core
 {
@@ -11,8 +12,9 @@ namespace ChatDirector.core
         bool debug { get; set; }
         // Do not allow the user to specify whether or not they are in testing mode,
         // that should only be done programmatically in the unit tests.
-        //private bool testing = false;
-        List<IModule> modules {get;}
+        [YamlIgnore]
+        private bool testing = false;
+        List<IModule> modules { get; }
         Dictionary<Type, ILoadable> daemons = new Dictionary<Type, ILoadable>();
         Dictionary<string, Chain> chains = new Dictionary<string, Chain>();
         // This is for storage of generic keys that modules may need.
@@ -223,12 +225,7 @@ namespace ChatDirector.core
 
         public Dictionary<string, Chain> getChains()
         {
-            throw new NotImplementedException();
-        }
-
-        public ILoadable getOrCreateDaemon(ILoadable class1)
-        {
-            throw new NotImplementedException();
+            return this.chains;
         }
 
         public bool isDebug()
@@ -241,17 +238,51 @@ namespace ChatDirector.core
             return false;
         }
 
-        public List<IModule> getModules() {
+        public List<IModule> getModules()
+        {
             return this.modules;
         }
 
-        public IEnumerable<ILoadable> getDaemons() {
+        public IEnumerable<ILoadable> getDaemons()
+        {
             return daemons.Values;
         }
 
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
-            throw new NotImplementedException();
+            ChatDirector.setConfigStaging(this);
+            parser.Consume<MappingStart>();
+            var moreChains = true;
+            while (moreChains)
+            {
+                if (parser.Current.GetType() != typeof(Scalar))
+                {
+                    break;
+                }
+                switch (parser.Consume<Scalar>().Value)
+                {
+                    case "chains":
+                        parser.Consume<MappingStart>();
+                        var chainKey = parser.Consume<Scalar>().Value;
+                        var chain = (Chain)nestedObjectDeserializer(typeof(Chain));
+                        this.chains.Add(chainKey, chain);
+                        parser.Consume<MappingEnd>();
+                        break;
+                    case "debug":
+                        this.debug = Boolean.Parse(parser.Consume<Scalar>().Value);
+                        break;
+                    case "module_data":
+                        parser.Consume<MappingStart>();
+                        var test2 = parser.Consume<Scalar>();
+                        parser.Consume<MappingEnd>();
+                        throw new NotImplementedException();
+                        break;
+                    default:
+                        moreChains = false;
+                        break;
+                }
+            }
+            parser.Consume<MappingEnd>();
         }
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)

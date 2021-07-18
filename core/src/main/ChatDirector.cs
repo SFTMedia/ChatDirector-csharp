@@ -147,6 +147,10 @@ namespace ChatDirector.core
         {
             return instance.configStaging;
         }
+        public static void setConfigStaging(Configuration config)
+        {
+            instance.configStaging = config;
+        }
         public static ChatDirector getInstance()
         {
             return instance;
@@ -155,7 +159,7 @@ namespace ChatDirector.core
         {
             return config.getModule(class1);
         }
-        public ILoadable getOrCreateDaemon(ILoadable class1)
+        public ILoadable getOrCreateDaemon(Type class1)
         {
             return config.getOrCreateDaemon(class1);
         }
