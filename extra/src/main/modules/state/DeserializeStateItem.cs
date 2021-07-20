@@ -27,7 +27,8 @@ namespace ChatDirector.state
                 var output = deserializer.Deserialize<Context>(input);
                 return output;
             } else {
-                throw new Exception("Someone attempted to run commands without the proper token " + input);
+                Console.Error.WriteLine("Someone attempted to run commands without the proper token " + input);
+                return new Context().halt();
             }
         }
     }
