@@ -1,0 +1,22 @@
+chains:
+  core:
+    - break
+    - echo: test
+    - reload
+    - halt
+  mqtt:
+    - mqtt-input:
+        topic: "my_topic"
+        connection: "my_connection"
+    - mqtt-output:
+        topic: "my_topic"
+        connection: "my_connection"
+  state:
+    - serialize-state:
+        token: "Long 32+ character random string that is shared between the sender and receiver"
+    - deserialize-state:
+        token: "Long 32+ character random string that is shared between the sender and receiver"
+module_data:
+  mqtt:
+    my_connection: ""
+debug: true
