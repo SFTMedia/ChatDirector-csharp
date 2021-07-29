@@ -12,8 +12,10 @@ chains:
         topic: "my_topic"
         connection: "my_connection"
   state:
+    # This puts the state onto the current so you can send it off via mqtt
     - serialize-state:
         token: "Long 32+ character random string that is shared between the sender and receiver"
+    # This takes the state off current and continues
     - deserialize-state:
         token: "Long 32+ character random string that is shared between the sender and receiver"
 module_data:
