@@ -25,7 +25,7 @@ namespace ChatDirector.core
         public bool isValid()
         {
             return true;
-        }
+        }   
         public Type getItemClass(string type)
         {
             switch (type)
