@@ -2,7 +2,7 @@ using ChatDirector.rust;
 
 namespace Oxide.Plugins
 {
-    [Info("Chat Director", "blalp", "0.0.1")]
+    [Info("Chat Director", "blalp", "0.0.2")]
     [Description("Chat Director")]
     public class RustChatDirector : CovalencePlugin
     {
@@ -12,6 +12,8 @@ namespace Oxide.Plugins
         {
             // Hope that The directory is set correctly for config.yml in the root
             instance = new ChatDirector.core.ChatDirector();
+            instance.loadConfig();
+            itemDaemon = (RustInputItemDaemon)instance.getOrCreateDaemon(typeof(RustInputItemDaemon));
         }
 
         void OnServerInitialized(bool initial)
