@@ -18,6 +18,13 @@ chains:
     # This takes the state off current and continues
     - deserialize-state:
         token: "Long 32+ character random string that is shared between the sender and receiver"
+  rust:
+    - rust-input:
+        chat: true
+        login: true
+        logout: true
+        server_started: true
+        server_stopped: true
 module_data:
   mqtt:
     my_connection: ""
