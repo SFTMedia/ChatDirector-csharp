@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatDirector-extra", "extra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatDirector-universal", "universal\ChatDirector-universal.csproj", "{8A2598C0-82AD-40CE-A8F7-830476E98F9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatDirector-rust", "rust\ChatDirector-rust.csproj", "{8B7410C3-C447-4B1C-8772-E931253CB4D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,17 @@ Global
 		{8A2598C0-82AD-40CE-A8F7-830476E98F9F}.Release|x64.Build.0 = Release|Any CPU
 		{8A2598C0-82AD-40CE-A8F7-830476E98F9F}.Release|x86.ActiveCfg = Release|Any CPU
 		{8A2598C0-82AD-40CE-A8F7-830476E98F9F}.Release|x86.Build.0 = Release|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Debug|x64.Build.0 = Debug|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Release|x64.ActiveCfg = Release|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Release|x64.Build.0 = Release|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B7410C3-C447-4B1C-8772-E931253CB4D2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
