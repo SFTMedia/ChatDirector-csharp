@@ -7,13 +7,13 @@ namespace Oxide.Plugins
     public class RustChatDirector : CovalencePlugin
     {
         public static ChatDirector.core.ChatDirector instance { get; set; }
-        private static RustInputItemDaemon itemDaemon { get; set; }
+        private static ChatDirector.rust.RustInputItemDaemon itemDaemon { get; set; }
         private void Init()
         {
             // Hope that The directory is set correctly for config.yml in the root
             instance = new ChatDirector.core.ChatDirector();
             instance.loadConfig();
-            itemDaemon = (RustInputItemDaemon)instance.getOrCreateDaemon(typeof(RustInputItemDaemon));
+            itemDaemon = (ChatDirector.rust.RustInputItemDaemon)instance.getOrCreateDaemon(typeof(ChatDirector.rust.RustInputItemDaemon));
         }
 
         void OnServerInitialized(bool initial)
