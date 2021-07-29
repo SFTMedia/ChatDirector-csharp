@@ -3,6 +3,7 @@ using YamlDotNet.Serialization.NamingConventions;
 using ChatDirector.core;
 using System;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace ChatDirector.state
 {
@@ -16,10 +17,10 @@ namespace ChatDirector.state
 
         public Context process(Context context)
         {
-            var hmac = new HMACSHA512(token);
+            var hmac = new HMACSHA512(Encoding.Default.GetBytes(token));
             byte[] expectedHash = new byte[hmac.HashSize / 8];
-            var input = context.getCurrent().SubString(expectedHash.Length);
-            var realHash = hmac.ComputeHash(input);
+            var input = context.getCurrent().Substring(expectedHash.Length);
+            var realHash = hmac.ComputeHash(Encoding.Default.GetBytes(input));
 
             if (expectedHash == realHash) {
                 // All is dandy

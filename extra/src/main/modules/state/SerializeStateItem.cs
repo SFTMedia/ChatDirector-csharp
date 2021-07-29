@@ -20,8 +20,8 @@ namespace ChatDirector.state
         {
             var serializer = new SerializerBuilder().WithNamingConvention(HyphenatedNamingConvention.Instance).Build();
             var output = serializer.Serialize(context);
-            var hmac = new HMACSHA512(token);
-            var hash = hmac.ComputeHash(output);
+            var hmac = new HMACSHA512(Encoding.Default.GetBytes(token));
+            var hash = hmac.ComputeHash(Encoding.Default.GetBytes(output));
             return new Context(BitConverter.ToString(hash)+output);
         }
     }
