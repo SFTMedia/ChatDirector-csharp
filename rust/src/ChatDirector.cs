@@ -1,7 +1,6 @@
 namespace Oxide.Ext.ChatDirector
 {
     using System;
-    using System.Collections.Generic;
     using System.Reflection;
     using Oxide.Core;
     using Oxide.Core.Extensions;
