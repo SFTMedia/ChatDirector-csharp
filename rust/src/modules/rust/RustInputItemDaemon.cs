@@ -1,8 +1,9 @@
 using ChatDirector.core;
+using ChatDirectorMain = ChatDirector.core.ChatDirector;
 using System.Collections.Generic;
 
 
-namespace ChatDirector.rust
+namespace Oxide.Ext.ChatDirector
 {
     enum InputTypes
     {
@@ -72,7 +73,7 @@ namespace ChatDirector.rust
                 var context = new Context();
                 context.Add("SERVER_HOTLOAD", initial.ToString());
 
-                ChatDirector.core.ChatDirector.run(item, context, true);
+                ChatDirectorMain.run(item, context, true);
             }
         }
 
@@ -80,7 +81,7 @@ namespace ChatDirector.rust
         {
             foreach (var item in this.items[InputTypes.ServerStopped])
             {
-                ChatDirector.core.ChatDirector.run(item, new Context(), true);
+                ChatDirectorMain.run(item, new Context(), true);
             }
         }
 
@@ -104,7 +105,7 @@ namespace ChatDirector.rust
                     context.Add(contextEntry.Key, contextEntry.Value);
                 }
 
-                ChatDirector.core.ChatDirector.run(item, context, true);
+                ChatDirectorMain.run(item, context, true);
             }
             return null;
         }
@@ -125,7 +126,7 @@ namespace ChatDirector.rust
                     context.Add(contextEntry.Key, contextEntry.Value);
                 }
 
-                ChatDirector.core.ChatDirector.run(item, context, true);
+                ChatDirectorMain.run(item, context, true);
             }
         }
 
@@ -143,7 +144,7 @@ namespace ChatDirector.rust
                     context.Add(contextEntry.Key, contextEntry.Value);
                 }
 
-                ChatDirector.core.ChatDirector.run(item, context, true);
+                ChatDirectorMain.run(item, context, true);
             }
         }
     }

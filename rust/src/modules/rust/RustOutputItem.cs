@@ -1,6 +1,6 @@
 using ChatDirector.core;
 
-namespace ChatDirector.rust
+namespace Oxide.Ext.ChatDirector
 {
     public abstract class RustOutputItem : IItem
     {

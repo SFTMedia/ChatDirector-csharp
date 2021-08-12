@@ -1,4 +1,4 @@
-using ChatDirector.rust;
+using Oxide.Ext.ChatDirector;
 
 namespace Oxide.Plugins
 {

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>ChatDirector</RootNamespace>
+    <RootNamespace>Oxide.Ext.ChatDirector</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\core\ChatDirector-core.csproj" />
@@ -112,6 +112,11 @@
   <ItemGroup>
     <Reference Include="System.Transactions.dll">
       <HintPath>RustDedicated_Data/Managed/System.Transactions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Oxide.Core.dll">
+      <HintPath>RustDedicated_Data/Managed/Oxide.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using ChatDirector.core;
 
-namespace ChatDirector.rust
+namespace Oxide.Ext.ChatDirector
 {
     public abstract class RustModule : IModule
     {
