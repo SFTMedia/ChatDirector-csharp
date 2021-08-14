@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using ChatDirector.core;
+using Oxide.Ext.ChatDirector.core;
 
 namespace Oxide.Ext.ChatDirector
 {
@@ -14,13 +14,13 @@ namespace Oxide.Ext.ChatDirector
         public Context getContext(object obj)
         {
             Context output = new Context();
-            if (obj.GetType().IsAssignableTo(typeof(BasePlayer))) {
+            if (typeof(BasePlayer).IsAssignableFrom(obj.GetType())) {
                 BasePlayer basePlayer = (BasePlayer)obj;
                 output.Add("PLAYER_NAME", basePlayer.displayName);
                 output.Add("PLAYER_UUID", basePlayer.OwnerID.ToString());
             }
 
-            if(obj.GetType().IsAssignableTo(typeof(ConVar.Chat.ChatChannel))) {
+            if(typeof(ConVar.Chat.ChatChannel).IsAssignableFrom(obj.GetType())) {
                 ConVar.Chat.ChatChannel chatChannel = (ConVar.Chat.ChatChannel)obj;
                 output.Add("CHAT_CHANNEL", chatChannel.ToString());
             }

@@ -1,5 +1,5 @@
-using ChatDirector.core;
-using ChatDirectorMain = ChatDirector.core.ChatDirector;
+using Oxide.Ext.ChatDirector.core;
+using ChatDirectorMain = Oxide.Ext.ChatDirector.core.ChatDirector;
 using System.Collections.Generic;
 
 

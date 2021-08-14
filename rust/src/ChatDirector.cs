@@ -1,10 +1,7 @@
 namespace Oxide.Ext.ChatDirector
 {
-    using System;
-    using System.Reflection;
     using Oxide.Core;
     using Oxide.Core.Extensions;
-    using ChatDirector;
 
     public class ChatDirectorExtension : Extension
     {

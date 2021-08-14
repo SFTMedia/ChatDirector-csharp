@@ -1,4 +1,4 @@
-using ChatDirector.core;
+using Oxide.Ext.ChatDirector.core;
 
 namespace Oxide.Ext.ChatDirector
 {

@@ -1,8 +1,6 @@
-using Oxide.Ext.ChatDirector.core;
-
-namespace Oxide.Ext.ChatDirector
+namespace Oxide.Ext.ChatDirector.core
 {
-    public abstract class RustOutputItem : IItem
+    public class BreakItem : IItem
     {
         public bool isValid()
         {
@@ -10,7 +8,7 @@ namespace Oxide.Ext.ChatDirector
         }
         public Context process(Context context)
         {
-            return new Context();
+            return null;
         }
     }
 }

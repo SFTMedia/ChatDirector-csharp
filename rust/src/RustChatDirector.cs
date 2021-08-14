@@ -6,12 +6,12 @@ namespace Oxide.Plugins
     [Description("Chat Director")]
     public class RustChatDirector : CovalencePlugin
     {
-        public static ChatDirector.core.ChatDirector instance { get; set; }
+        public static Oxide.Ext.ChatDirector.core.ChatDirector instance { get; set; }
         private static RustInputItemDaemon itemDaemon { get; set; }
         private void Init()
         {
             // Hope that The directory is set correctly for config.yml in the root
-            instance = new ChatDirector.core.ChatDirector();
+            instance = new Oxide.Ext.ChatDirector.core.ChatDirector();
             instance.loadConfig();
             itemDaemon = (RustInputItemDaemon)instance.getOrCreateDaemon(typeof(RustInputItemDaemon));
         }

@@ -1,8 +1,7 @@
-using Oxide.Ext.ChatDirector.core;
-
-namespace Oxide.Ext.ChatDirector
+using System.Threading;
+namespace Oxide.Ext.ChatDirector.core
 {
-    public abstract class RustOutputItem : IItem
+    public class ReloadItem : IItem
     {
         public bool isValid()
         {
@@ -10,6 +9,7 @@ namespace Oxide.Ext.ChatDirector
         }
         public Context process(Context context)
         {
+            new Thread(new TimedLoad().run).Start();
             return new Context();
         }
     }
