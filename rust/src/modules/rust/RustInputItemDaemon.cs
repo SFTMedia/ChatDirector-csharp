@@ -66,85 +66,95 @@ namespace Oxide.Ext.ChatDirector
 
         public void OnServerInitialized(bool initial)
         {
-            foreach (var item in this.items[InputTypes.ServerStarted])
-            {
-                var rustModule = Oxide.Plugins.RustChatDirector.instance.getModule(typeof(RustModule));
+            if (items.ContainsKey(InputTypes.ServerStarted)) {
+                foreach (var item in this.items[InputTypes.ServerStarted])
+                {
+                    var rustModule = Oxide.Plugins.RustChatDirector.instance.getModule(typeof(RustModule));
 
-                var context = new Context();
-                context.Add("SERVER_HOTLOAD", initial.ToString());
+                    var context = new Context();
+                    context.Add("SERVER_HOTLOAD", initial.ToString());
 
-                ChatDirectorMain.run(item, context, true);
+                    ChatDirectorMain.run(item, context, true);
+                }
             }
         }
 
         public void OnServerShutdown()
         {
-            foreach (var item in this.items[InputTypes.ServerStopped])
-            {
-                ChatDirectorMain.run(item, new Context(), true);
+            if (items.ContainsKey(InputTypes.ServerStopped)) {
+                foreach (var item in this.items[InputTypes.ServerStopped])
+                {
+                    ChatDirectorMain.run(item, new Context(), true);
+                }
             }
         }
 
         public object OnPlayerChat(BasePlayer player, string message, ConVar.Chat.ChatChannel channel)
         {
-            foreach (var item in this.items[InputTypes.Chat])
-            {
-                var rustModule = Oxide.Plugins.RustChatDirector.instance.getModule(typeof(RustModule));
-
-                var context = new Context();
-                context.Add("CHAT_MESSAGE", message);
-
-                var contextFromPlayer = rustModule.getContext(player);
-                foreach (var contextEntry in contextFromPlayer)
+            if (items.ContainsKey(InputTypes.Chat)) {
+                foreach (var item in this.items[InputTypes.Chat])
                 {
-                    context.Add(contextEntry.Key, contextEntry.Value);
-                }
-                var contextFromChatChannel = rustModule.getContext(channel);
-                foreach (var contextEntry in contextFromChatChannel)
-                {
-                    context.Add(contextEntry.Key, contextEntry.Value);
-                }
+                    var rustModule = Oxide.Plugins.RustChatDirector.instance.getModule(typeof(RustModule));
 
-                ChatDirectorMain.run(item, context, true);
+                    var context = new Context();
+                    context.Add("CHAT_MESSAGE", message);
+
+                    var contextFromPlayer = rustModule.getContext(player);
+                    foreach (var contextEntry in contextFromPlayer)
+                    {
+                        context.Add(contextEntry.Key, contextEntry.Value);
+                    }
+                    var contextFromChatChannel = rustModule.getContext(channel);
+                    foreach (var contextEntry in contextFromChatChannel)
+                    {
+                        context.Add(contextEntry.Key, contextEntry.Value);
+                    }
+
+                    ChatDirectorMain.run(item, context, true);
+                }
             }
             return null;
         }
 
         public void OnPlayerConnected(BasePlayer player)
         {
-            foreach (var item in this.items[InputTypes.Chat])
-            {
-                var chatDirector = Oxide.Plugins.RustChatDirector.instance;
-
-                var rustModule = chatDirector.getModule(typeof(RustModule));
-
-                var context = new Context();
-
-                var contextFromPlayer = rustModule.getContext(player);
-                foreach (var contextEntry in contextFromPlayer)
+            if(items.ContainsKey(InputTypes.Login)) {
+                foreach (var item in this.items[InputTypes.Login])
                 {
-                    context.Add(contextEntry.Key, contextEntry.Value);
-                }
+                    var chatDirector = Oxide.Plugins.RustChatDirector.instance;
 
-                ChatDirectorMain.run(item, context, true);
+                    var rustModule = chatDirector.getModule(typeof(RustModule));
+
+                    var context = new Context();
+
+                    var contextFromPlayer = rustModule.getContext(player);
+                    foreach (var contextEntry in contextFromPlayer)
+                    {
+                        context.Add(contextEntry.Key, contextEntry.Value);
+                    }
+
+                    ChatDirectorMain.run(item, context, true);
+                }
             }
         }
 
         public void OnPlayerDisconnected(BasePlayer player, string reason)
         {
-            foreach (var item in this.items[InputTypes.Chat])
-            {
-                var rustModule = Oxide.Plugins.RustChatDirector.instance.getModule(typeof(RustModule));
-
-                var context = new Context();
-
-                var contextFromPlayer = rustModule.getContext(player);
-                foreach (var contextEntry in contextFromPlayer)
+            if(items.ContainsKey(InputTypes.Logout)) {
+                foreach (var item in this.items[InputTypes.Logout])
                 {
-                    context.Add(contextEntry.Key, contextEntry.Value);
-                }
+                    var rustModule = Oxide.Plugins.RustChatDirector.instance.getModule(typeof(RustModule));
 
-                ChatDirectorMain.run(item, context, true);
+                    var context = new Context();
+
+                    var contextFromPlayer = rustModule.getContext(player);
+                    foreach (var contextEntry in contextFromPlayer)
+                    {
+                        context.Add(contextEntry.Key, contextEntry.Value);
+                    }
+
+                    ChatDirectorMain.run(item, context, true);
+                }
             }
         }
     }
