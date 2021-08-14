@@ -11,7 +11,8 @@ namespace Oxide.Plugins
         private void Init()
         {
             // Hope that The directory is set correctly for config.yml in the root
-            instance = new Oxide.Ext.ChatDirector.core.ChatDirector();
+            this.LoadConfig();
+            instance = new Oxide.Ext.ChatDirector.core.ChatDirector(this.Config);
             instance.loadConfig();
             itemDaemon = (RustInputItemDaemon)instance.getOrCreateDaemon(typeof(RustInputItemDaemon));
         }

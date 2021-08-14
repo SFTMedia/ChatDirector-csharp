@@ -1,8 +1,5 @@
 using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Shims;
 using System;
 using System.Collections.Generic;
 namespace Oxide.Ext.ChatDirector.core
@@ -13,25 +10,36 @@ namespace Oxide.Ext.ChatDirector.core
         Configuration configStaging = null;
         static ChatDirector instance;
         string rawData;
+        ChatDirector() {
+            config = new Configuration();
+            instance = this;
+        }
         public ChatDirector(string rawData) : this()
         {
             this.rawData = rawData;
         }
-        public ChatDirector()
-        {
-            config = new Configuration();
-            instance = this;
-            rawData = File.ReadAllText("config.yml");
+        public ChatDirector(Oxide.Core.Configuration.DynamicConfigFile oxideConfig) : this() {
+            // Convert it to JSON then pass as rawdata
+            var serializer = getSerializer();
+            var stringWriter = new StringWriter();
+            serializer.Serialize(stringWriter, oxideConfig);
+            this.rawData = stringWriter.ToString();
         }
+
+        JsonSerializer getSerializer() {
+            var contractResolver = new SnakeCaseContractResolver();
+            var serializerSettings = new JsonSerializerSettings();
+            serializerSettings.ContractResolver = contractResolver;
+            var serializer = JsonSerializer.Create(serializerSettings);
+            serializer.Converters.Add(new EchoItemConverter());
+            serializer.Converters.Add(new ChainConverter());
+            serializer.Converters.Add(new ConfigurationConverter());
+            return serializer;
+        }
+
         public bool loadConfig()
         {
-            var contractResolver = new SnakeCaseContractResolver();
-            var deserializerSettings = new JsonSerializerSettings();
-            deserializerSettings.ContractResolver = contractResolver;
-            var deserializer = JsonSerializer.Create(deserializerSettings);
-            deserializer.Converters.Add(new EchoItemConverter());
-            deserializer.Converters.Add(new ChainConverter());
-            deserializer.Converters.Add(new ConfigurationConverter());
+            var deserializer = getSerializer();
             try
             {
                 if (rawData != null)
