@@ -2,7 +2,7 @@ using Oxide.Ext.ChatDirector.core;
 
 namespace Oxide.Ext.ChatDirector
 {
-    public abstract class RustOutputItem : IItem
+    public class RustOutputItem : IItem
     {
         public bool isValid()
         {

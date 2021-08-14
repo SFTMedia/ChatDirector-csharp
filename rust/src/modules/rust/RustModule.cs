@@ -4,7 +4,7 @@ using Oxide.Ext.ChatDirector.core;
 
 namespace Oxide.Ext.ChatDirector
 {
-    public abstract class RustModule : IModule
+    public class RustModule : IModule
     {
         public List<string> getItemNames()
         {

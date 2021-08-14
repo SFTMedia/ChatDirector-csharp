@@ -2,7 +2,7 @@ using Oxide.Ext.ChatDirector.core;
 
 namespace Oxide.Ext.ChatDirector
 {
-    public abstract class RustInputItem : IItem
+    public class RustInputItem : IItem
     {
         public bool chat;
         public bool login;

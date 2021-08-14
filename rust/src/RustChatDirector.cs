@@ -1,4 +1,5 @@
 using Oxide.Ext.ChatDirector;
+using Oxide.Ext.ChatDirector.core;
 
 namespace Oxide.Plugins
 {
@@ -11,8 +12,15 @@ namespace Oxide.Plugins
         private void Init()
         {
             // Hope that The directory is set correctly for config.yml in the root
-            this.LoadConfig();
-            instance = new Oxide.Ext.ChatDirector.core.ChatDirector(this.Config);
+            if (!this.HasConfig) {
+                Config["debug"]=true;
+                Config["chains", "example"]="an item would go here";
+                this.SaveConfig();
+            } else {
+                this.LoadConfig();
+            }
+            var config = Config.ReadObject<Configuration>();
+            instance = new Oxide.Ext.ChatDirector.core.ChatDirector(config);
             instance.loadConfig();
             itemDaemon = (RustInputItemDaemon)instance.getOrCreateDaemon(typeof(RustInputItemDaemon));
         }

@@ -14,7 +14,7 @@ namespace Oxide.Ext.ChatDirector
         Logout,
     }
 
-    public abstract class RustInputItemDaemon : IDaemon
+    public class RustInputItemDaemon : IDaemon
     {
         private Dictionary<InputTypes, List<RustInputItem>> items = new Dictionary<InputTypes, List<RustInputItem>>();
 

@@ -18,7 +18,7 @@ namespace Oxide.Ext.ChatDirector.core
         {
             this.rawData = rawData;
         }
-        public ChatDirector(Oxide.Core.Configuration.DynamicConfigFile oxideConfig) : this() {
+        public ChatDirector(object oxideConfig) : this() {
             // Convert it to JSON then pass as rawdata
             var serializer = getSerializer();
             var stringWriter = new StringWriter();
