@@ -13,6 +13,12 @@ namespace ChatDirector.core
 #endif
     {
         internal string format;
+
+        public EchoItem() {}
+        public EchoItem(string format) {
+            this.format=format;
+        }
+
         public bool isValid()
         {
             return format != null;

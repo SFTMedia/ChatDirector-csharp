@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net5.0;net48</TargetFrameworks>
     <RootNamespace>ChatDirector</RootNamespace>
-    <DefineConstant>Serializer_YamlDotNet</DefineConstant>
+    <!--<DefineConstant>Serializer_YamlDotNet</DefineConstant>-->
     <!--<DefineConstant>Serializer_Newtonsoft</DefineConstant>-->
   </PropertyGroup>
   <ItemGroup>
@@ -12,6 +12,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup Condition="$(DefineConstants.Contains('Serializer_YamlDotNet'))">
+    <PackageReference Include="YamlDotNet" Version="11.2.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
 </Project>

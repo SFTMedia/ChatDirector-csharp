@@ -8,10 +8,7 @@
     <!-- The state module uses YAML -->
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
-  <ItemGroup Condition="$(DefineConstants.Contains('Serializer_Newtonsoft'))">
-    <ProjectReference Include="..\core\ChatDirector-core-newtonsoft.csproj" />
-  </ItemGroup>
-  <ItemGroup Condition="$(DefineConstants.Contains('Serializer_YamlDotNet'))">
+  <ItemGroup>
     <ProjectReference Include="..\core\ChatDirector-core.csproj" />
   </ItemGroup>
 </Project>

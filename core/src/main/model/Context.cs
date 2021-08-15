@@ -5,7 +5,7 @@ namespace ChatDirector.core
     {
         bool shouldHalt = false;
         List<string> removeKeys = new List<string>();
-        public Context()
+        public Context() : this("")
         {
         }
         public Context(string current)

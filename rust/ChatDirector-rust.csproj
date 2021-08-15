@@ -1,14 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net48<!--net5.0 (This is used for testing)--></TargetFrameworks>
+    <TargetFrameworks>
+      net48
+      <!--net5.0 (This is used for testing)-->
+    </TargetFrameworks>
     <RootNamespace>Oxide.Ext.RustChatDirector</RootNamespace>
     <AssemblyName>Oxide.Ext.RustChatDirector</AssemblyName>
+    <DefineConstant>Serializer_Newtonsoft</DefineConstant>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\core\ChatDirector-core-newtonsoft.csproj" />
+    <ProjectReference Include="..\core\ChatDirector-core.csproj">
+      <Properties>DefineConstants=Serializer_Newtonsoft</Properties>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\extra\ChatDirector-extra-newtonsoft.csproj" />
+    <ProjectReference Include="..\extra\ChatDirector-extra.csproj">
+      <Properties>DefineConstants=Serializer_Newtonsoft</Properties>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp.dll">
@@ -28,6 +36,11 @@
   <ItemGroup>
     <Reference Include="Oxide.Core.dll">
       <HintPath>RustDedicated_Data/Managed/Oxide.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json.dll">
+      <HintPath>RustDedicated_Data/Managed/Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <!--

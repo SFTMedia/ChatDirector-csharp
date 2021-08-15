@@ -7,7 +7,7 @@ namespace Oxide.Ext.RustChatDirector
     {
         public ChatDirectorExtension(ExtensionManager manager) : base(manager) {}
 
-        public override string Name => "ChatDirector";
+        public override string Name => "RustChatDirector";
 
         public override string Author => "blalp";
 

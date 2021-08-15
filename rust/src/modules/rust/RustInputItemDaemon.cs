@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Oxide.Ext.RustChatDirector
 {
-    enum InputTypes
+    public enum InputTypes
     {
         ServerStarted,
         ServerStopped,
@@ -16,7 +16,7 @@ namespace Oxide.Ext.RustChatDirector
 
     public class RustInputItemDaemon : IDaemon
     {
-        private Dictionary<InputTypes, List<RustInputItem>> items = new Dictionary<InputTypes, List<RustInputItem>>();
+        public Dictionary<InputTypes, List<RustInputItem>> items = new Dictionary<InputTypes, List<RustInputItem>>();
 
         public void addItem(IItem item)
         {

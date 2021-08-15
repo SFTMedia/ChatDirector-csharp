@@ -3,6 +3,13 @@
 using Woah_there_tiger_you_can__t_have_both_YamlDotNet_and_Newtonsoft_pick_one;
 #endif
 #endif
+#if Serializer_YamlDotNet
+#else
+#if Serializer_Newtonsoft
+#else
+using Woah_there_tiger_you_have_to_choose_YamlDotNet_or_Newtonsoft;
+#endif
+#endif
 using System.IO;
 #if Serializer_YamlDotNet
 using YamlDotNet.Serialization;
