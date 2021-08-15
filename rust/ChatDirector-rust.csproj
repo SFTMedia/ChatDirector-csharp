@@ -5,6 +5,9 @@
     <AssemblyName>Oxide.Ext.ChatDirector</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\core\ChatDirector-core-newtonsoft.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Assembly-CSharp.dll">
       <HintPath>RustDedicated_Data/Managed/Assembly-CSharp.dll</HintPath>
     </Reference>
@@ -24,4 +27,9 @@
       <HintPath>RustDedicated_Data/Managed/Oxide.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <!--
+  <ItemGroup>
+    <PackageReference Include="M2MqttDotnetCore" Version="1.1.0" />
+  </ItemGroup>
+  -->
 </Project>
