@@ -1,6 +1,6 @@
-using Oxide.Ext.ChatDirector.core;
+using ChatDirector.core;
 
-namespace Oxide.Ext.ChatDirector
+namespace Oxide.Ext.RustChatDirector
 {
     public class RustInputItem : IItem
     {
@@ -12,7 +12,7 @@ namespace Oxide.Ext.ChatDirector
 
         public RustInputItem()
         {
-            ((RustInputItemDaemon)Oxide.Ext.ChatDirector.core.ChatDirector.getConfigStaging().getOrCreateDaemon(typeof(RustInputItemDaemon))).addItem(this);
+            ((RustInputItemDaemon)ChatDirector.core.ChatDirector.getConfigStaging().getOrCreateDaemon(typeof(RustInputItemDaemon))).addItem(this);
         }
 
         public bool isValid()

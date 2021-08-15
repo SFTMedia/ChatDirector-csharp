@@ -1,4 +1,4 @@
-namespace Oxide.Ext.ChatDirector
+namespace Oxide.Ext.RustChatDirector
 {
     using Oxide.Core;
     using Oxide.Core.Extensions;

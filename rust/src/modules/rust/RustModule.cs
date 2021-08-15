@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Oxide.Ext.ChatDirector.core;
+using ChatDirector.core;
 
-namespace Oxide.Ext.ChatDirector
+namespace Oxide.Ext.RustChatDirector
 {
     public class RustModule : IModule
     {
