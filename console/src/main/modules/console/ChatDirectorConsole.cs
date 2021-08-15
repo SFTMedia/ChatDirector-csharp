@@ -15,7 +15,7 @@ namespace ChatDirector.console
             }
             else
             {
-                chatDirector = new ChatDirector.core.ChatDirector();
+                chatDirector = new ChatDirector.core.ChatDirector(File.ReadAllText("config.yml"));
             }
             try
             {
