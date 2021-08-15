@@ -69,7 +69,7 @@ namespace Oxide.Ext.ChatDirector
             if (items.ContainsKey(InputTypes.ServerStarted)) {
                 foreach (var item in this.items[InputTypes.ServerStarted])
                 {
-                    var rustModule = Oxide.Plugins.RustChatDirector.instance.getModule(typeof(RustModule));
+                    var rustModule = Oxide.Ext.ChatDirector.core.ChatDirector.getInstance().getModule(typeof(RustModule));
 
                     var context = new Context();
                     context.Add("SERVER_HOTLOAD", initial.ToString());
@@ -94,7 +94,7 @@ namespace Oxide.Ext.ChatDirector
             if (items.ContainsKey(InputTypes.Chat)) {
                 foreach (var item in this.items[InputTypes.Chat])
                 {
-                    var rustModule = Oxide.Plugins.RustChatDirector.instance.getModule(typeof(RustModule));
+                    var rustModule = Oxide.Ext.ChatDirector.core.ChatDirector.getInstance().getModule(typeof(RustModule));
 
                     var context = new Context();
                     context.Add("CHAT_MESSAGE", message);
@@ -121,7 +121,7 @@ namespace Oxide.Ext.ChatDirector
             if(items.ContainsKey(InputTypes.Login)) {
                 foreach (var item in this.items[InputTypes.Login])
                 {
-                    var chatDirector = Oxide.Plugins.RustChatDirector.instance;
+                    var chatDirector = Oxide.Ext.ChatDirector.core.ChatDirector.getInstance();
 
                     var rustModule = chatDirector.getModule(typeof(RustModule));
 
@@ -143,7 +143,7 @@ namespace Oxide.Ext.ChatDirector
             if(items.ContainsKey(InputTypes.Logout)) {
                 foreach (var item in this.items[InputTypes.Logout])
                 {
-                    var rustModule = Oxide.Plugins.RustChatDirector.instance.getModule(typeof(RustModule));
+                    var rustModule = Oxide.Ext.ChatDirector.core.ChatDirector.getInstance().getModule(typeof(RustModule));
 
                     var context = new Context();
 

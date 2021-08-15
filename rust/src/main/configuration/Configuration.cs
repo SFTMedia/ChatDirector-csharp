@@ -201,6 +201,10 @@ namespace Oxide.Ext.ChatDirector.core
                     return false;
                 }
             }
+            if (!ChatDirector.hasChains())
+            {
+                return false;
+            }
             return true;
         }
         public Chain getChainForItem(IItem item)

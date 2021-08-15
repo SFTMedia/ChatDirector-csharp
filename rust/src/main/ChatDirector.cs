@@ -18,12 +18,14 @@ namespace Oxide.Ext.ChatDirector.core
         {
             this.rawData = rawData;
         }
-        public ChatDirector(object oxideConfig) : this() {
+        public ChatDirector(object obj) : this() {
             // Convert it to JSON then pass as rawdata
             var serializer = getSerializer();
             var stringWriter = new StringWriter();
-            serializer.Serialize(stringWriter, oxideConfig);
+            serializer.Serialize(stringWriter, obj);
             this.rawData = stringWriter.ToString();
+            Console.WriteLine("Raw data: "+rawData);
+            Console.WriteLine("obj: "+obj);
         }
 
         JsonSerializer getSerializer() {
