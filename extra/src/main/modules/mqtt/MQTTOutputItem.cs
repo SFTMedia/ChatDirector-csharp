@@ -1,6 +1,6 @@
 using System.Text;
 using ChatDirector.core;
-using uPLibrary.Networking.M2Mqtt.Messages;
+using M2Mqtt.Messages;
 
 namespace ChatDirector.extra
 {

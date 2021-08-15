@@ -1,5 +1,5 @@
 using ChatDirector.core;
-using uPLibrary.Networking.M2Mqtt;
+using M2Mqtt;
 using System.Net;
 using System;
 namespace ChatDirector.extra

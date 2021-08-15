@@ -1,5 +1,5 @@
-using uPLibrary.Networking.M2Mqtt.Messages;
-using uPLibrary.Networking.M2Mqtt;
+using M2Mqtt.Messages;
+using M2Mqtt;
 using System;
 using ChatDirector.core;
 using System.Collections.Generic;

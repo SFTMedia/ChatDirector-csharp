@@ -1,11 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;net48</TargetFrameworks>
+    <DefineConstants>$(DefineConstants);Serializer_YamlDotNet</DefineConstants>
+    <!--<DefineConstant>Serializer_Newtonsoft</DefineConstant>-->
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\core\ChatDirector-core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="M2MqttDotnetCore" Version="1.1.0" />
+    <PackageReference Include="M2MqttDotnetCore" />
   </ItemGroup>
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+  <ItemGroup Condition="$(DefineConstants.Contains('Serializer_Newtonsoft'))">
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+  <ItemGroup Condition="$(DefineConstants.Contains('Serializer_YamlDotNet'))">
+    <PackageReference Include="YamlDotNet" Version="11.2.1" />
+  </ItemGroup>
 </Project>

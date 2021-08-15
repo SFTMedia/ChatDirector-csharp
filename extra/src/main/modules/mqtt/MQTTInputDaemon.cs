@@ -2,9 +2,9 @@ using ChatDirector.core;
 using System.Collections.Generic;
 using System.Threading;
 using System;
-using uPLibrary.Networking.M2Mqtt;
-using uPLibrary.Networking.M2Mqtt.Messages;
-using uPLibrary.Networking.M2Mqtt.Exceptions;
+using M2Mqtt;
+using M2Mqtt.Messages;
+using M2Mqtt.Exceptions;
 
 namespace ChatDirector.extra
 {

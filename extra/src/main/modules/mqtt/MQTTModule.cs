@@ -1,7 +1,7 @@
 using ChatDirector.core;
 using System;
 using System.Collections.Generic;
-using uPLibrary.Networking.M2Mqtt.Messages;
+using M2Mqtt.Messages;
 
 namespace ChatDirector.extra
 {
@@ -61,7 +61,7 @@ namespace ChatDirector.extra
         public Context getContext(Object obj)
         {
             Context output = new Context();
-            if (obj.GetType().IsAssignableTo(typeof(MqttMsgPublishEventArgs)))
+            if (typeof(MqttMsgPublishEventArgs).IsAssignableFrom(obj.GetType()))
             {
                 output.Add("MQTT_TOPIC", ((MqttMsgPublishEventArgs)obj).Topic);
                 output.Add("CURRENT", BitConverter.ToString(((MqttMsgPublishEventArgs)obj).Message));
