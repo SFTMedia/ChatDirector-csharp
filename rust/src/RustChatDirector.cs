@@ -4,7 +4,7 @@ using System;
 
 namespace Oxide.Plugins
 {
-    [Info("Chat Director", "blalp", "0.0.3")]
+    [Info("Chat Director", "blalp", "0.0.4")]
     [Description("Chat Director")]
     public class RustChatDirector : CovalencePlugin
     {
