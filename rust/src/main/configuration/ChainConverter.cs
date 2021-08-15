@@ -15,40 +15,44 @@ namespace Oxide.Ext.ChatDirector.core
             Chain output = new Chain();
             Configuration config = new Configuration();
             reader.Read(); //Should be ArrayStart
-                Console.WriteLine("(DEBUG) before loop"+ reader.TokenType);
-            while (reader.TokenType!=JsonToken.EndArray) {
-                Console.WriteLine("(DEBUG) loop"+ reader.TokenType);
+            reader.Read(); // Object Start
+            while (reader.TokenType != JsonToken.EndObject)
+            {
                 IItem item;
-                if (reader.TokenType==JsonToken.StartObject) {
-                    reader.Read(); //Should be ObjectStart
-                    reader.Read(); //Should be String
+                if (reader.TokenType == JsonToken.PropertyName)
+                {
                     var itemName = (string)reader.Value;
-                Console.WriteLine("(DEBUG) itemname"+ reader.Value);
-                    item = (IItem)serializer.Deserialize(reader,ChatDirector.getConfigStaging().getItemClass(itemName));
-                Console.WriteLine("(DEBUG) item"+ item);
+                    reader.Read(); //Advance to object
+                    var type = ChatDirector.getConfigStaging().getItemClass(itemName);
+                    item = (IItem)serializer.Deserialize(reader, ChatDirector.getConfigStaging().getItemClass(itemName));
                     reader.Read(); //Should be ObjectEnd
-                } else {
+                }
+                else
+                {
                     reader.Read(); //Should be String
                     var itemName = (string)reader.Value;
-                Console.WriteLine("(DEBUG) itemname"+ itemName);
                     var itemType = ChatDirector.getConfigStaging().getItemClass(itemName);
-                    if (itemType != null ) {
+                    if (itemType != null)
+                    {
                         item = (IItem)Activator.CreateInstance(itemType);
-                Console.WriteLine("(DEBUG) item"+ item);
-                    } else {
+                    }
+                    else
+                    {
                         output.setInvalidItem();
-                        throw new Exception("Item of type "+itemName+" not found.");
+                        throw new Exception("Item of type " + itemName + " not found.");
                     }
                 }
-                Console.WriteLine("(DEBUG) adding "+ item);
                 output.addItem(item);
             }
-            while(output.items.Contains(null)){
+            while (output.items.Contains(null))
+            {
                 output.items.Remove(null);
             }
-            if(output.items.Count==0) {
+            if (output.items.Count == 0)
+            {
                 throw new Exception("No items parsed in chain");
             }
+            reader.Read(); //Should be ObjectEnd
             reader.Read(); //Should be ArrayEnd
             return output;
         }
