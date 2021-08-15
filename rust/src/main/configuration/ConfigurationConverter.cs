@@ -8,18 +8,19 @@ namespace Oxide.Ext.ChatDirector.core
     {
         public override bool CanConvert(Type objectType)
         {
-            return objectType.Equals(typeof(ConfigurationConverter));
+            return objectType.Equals(typeof(Configuration));
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            Console.WriteLine("test");
             var output = new Configuration();
             ChatDirector.setConfigStaging(output);
             reader.Read(); // Should be JsonToken.StartObject
             var moreChains = true;
             while (moreChains)
             {
-                if (reader.TokenType != JsonToken.String) // Was scaler
+                if (reader.TokenType != JsonToken.PropertyName) // Was scaler
                 {
                     break;
                 }
@@ -29,6 +30,7 @@ namespace Oxide.Ext.ChatDirector.core
                         reader.Read(); // Should be ObjectStart
                         reader.Read(); //Should be String
                         var chainKey = (string)reader.Value;
+                        reader.Read();// Start the chain
                         var chain = serializer.Deserialize<Chain>(reader);
                         output.chains.Add(chainKey, chain);
                         reader.Read(); //Should be ObjectEnd
@@ -43,6 +45,7 @@ namespace Oxide.Ext.ChatDirector.core
                         {
                             output.debug = Boolean.Parse((string)reader.Value);
                         }
+                        reader.Read(); //Advance one object
                         break;
                     case "module_data":
                         reader.Read(); //Should be ObjectStart
