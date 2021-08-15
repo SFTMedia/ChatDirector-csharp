@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net48;net5.0</TargetFrameworks>
+    <TargetFrameworks>net48<!--net5.0 (This is used for testing)--></TargetFrameworks>
     <RootNamespace>Oxide.Ext.ChatDirector</RootNamespace>
     <AssemblyName>Oxide.Ext.ChatDirector</AssemblyName>
   </PropertyGroup>
