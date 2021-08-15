@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net5.0;net48</TargetFrameworks>
-    <DefineConstants>$(DefineConstants);Serializer_YamlDotNet</DefineConstants>
+    <DefineConstants>$(DefineConstants);Serializer_Newtonsoft</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="M2MqttDotnetCore" />
