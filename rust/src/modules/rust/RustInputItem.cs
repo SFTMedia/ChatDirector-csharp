@@ -10,6 +10,11 @@ namespace Oxide.Ext.ChatDirector
         public bool server_started;
         public bool server_stopped;
 
+        public RustInputItem()
+        {
+            ((RustInputItemDaemon)Oxide.Ext.ChatDirector.core.ChatDirector.getInstance().getOrCreateDaemon(typeof(RustInputItemDaemon))).addItem(this);
+        }
+
         public bool isValid()
         {
             return true;
