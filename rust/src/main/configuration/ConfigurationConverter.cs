@@ -13,7 +13,6 @@ namespace Oxide.Ext.ChatDirector.core
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            Console.WriteLine("test");
             var output = new Configuration();
             ChatDirector.setConfigStaging(output);
             reader.Read(); // Should be JsonToken.StartObject
