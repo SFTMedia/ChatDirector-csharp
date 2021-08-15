@@ -1,24 +1,35 @@
 using System;
+#if Serializer_YamlDotNet
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
+using YamlDotNet.Core.Events;
+#elif Serializer_Newtonsoft
+using Newtonsoft.Json;
+#endif
 using System.Collections.Generic;
 using System.Linq;
-using YamlDotNet.Core.Events;
 namespace ChatDirector.core
 {
-    public class Configuration : IConfiguration, IYamlConvertible
+    public class Configuration : IConfiguration
+    #if Serializer_YamlDotNet
+    , IYamlConvertible
+    #endif
     {
         bool debug { get; set; }
         // Do not allow the user to specify whether or not they are in testing mode,
         // that should only be done programmatically in the unit tests.
+        #if Serializer_YamlDotNet
         [YamlIgnore]
+        #elif Serializer_Newtonsoft
+        [JsonIgnore]
+        #endif
         private bool testing = false;
-        List<IModule> modules { get; }
-        Dictionary<Type, ILoadable> daemons = new Dictionary<Type, ILoadable>();
-        Dictionary<string, Chain> chains = new Dictionary<string, Chain>();
+        internal List<IModule> modules { get; }
+        internal Dictionary<Type, ILoadable> daemons = new Dictionary<Type, ILoadable>();
+        internal Dictionary<string, Chain> chains = new Dictionary<string, Chain>();
         // This is for storage of generic keys that modules may need.
         // The first key is the module name
-        Dictionary<string, Dictionary<string, string>> moduleData = new Dictionary<string, Dictionary<string, string>>();
+        internal Dictionary<string, Dictionary<string, string>> moduleData = new Dictionary<string, Dictionary<string, string>>();
         /**
          * Maintain this list as some things run in separate threads, so with an item
          * you need to be able to get the chain object to start execution. Look for a
@@ -203,6 +214,10 @@ namespace ChatDirector.core
                     return false;
                 }
             }
+            if (!ChatDirector.hasChains())
+            {
+                return false;
+            }
             return true;
         }
         public Chain getChainForItem(IItem item)
@@ -233,13 +248,15 @@ namespace ChatDirector.core
         {
             return this.modules;
         }
-        public Dictionary<string,Dictionary<string,string>> getModuleData() {
+        public Dictionary<string, Dictionary<string, string>> getModuleData()
+        {
             return this.moduleData;
         }
         public IEnumerable<ILoadable> getDaemons()
         {
             return daemons.Values;
         }
+#if Serializer_YamlDotNet
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
             ChatDirector.setConfigStaging(this);
@@ -280,5 +297,71 @@ namespace ChatDirector.core
         {
             throw new NotImplementedException();
         }
+#elif Serializer_Newtonsoft
+    public class Converter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType.Equals(typeof(Configuration));
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            var output = new Configuration();
+            ChatDirector.setConfigStaging(output);
+            reader.Read(); // Should be JsonToken.StartObject
+            var moreChains = true;
+            while (moreChains)
+            {
+                if (reader.TokenType != JsonToken.PropertyName) // Was scaler
+                {
+                    break;
+                }
+                switch (reader.Value)
+                {
+                    case "chains":
+                        reader.Read(); // Should be ObjectStart
+                        reader.Read(); //Should be String
+                        var chainKey = (string)reader.Value;
+                        reader.Read();// Start the chain
+                        var chain = serializer.Deserialize<Chain>(reader);
+                        output.chains.Add(chainKey, chain);
+                        reader.Read(); //Should be ObjectEnd
+                        break;
+                    case "debug":
+                        reader.Read(); //Should be string
+                        if (reader.TokenType == JsonToken.Boolean)
+                        {
+                            output.debug = (bool)reader.Value;
+                        }
+                        else
+                        {
+                            output.debug = Boolean.Parse((string)reader.Value);
+                        }
+                        reader.Read(); //Advance one object
+                        break;
+                    case "module_data":
+                        reader.Read(); //Should be ObjectStart
+                        reader.Read(); //Should be string
+                        var test2 = serializer.Deserialize<Dictionary<String, Dictionary<String, String>>>(reader);
+                        output.moduleData = test2;
+                        reader.Read(); //Should be object end
+                        throw new NotImplementedException();
+                        break;
+                    default:
+                        moreChains = false;
+                        break;
+                }
+            }
+            reader.Read(); //Should be ObjectEnd
+            return output;
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+    }
+#endif
     }
 }

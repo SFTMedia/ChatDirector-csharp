@@ -8,6 +8,6 @@ namespace ChatDirector.core
          * @param context
          * @return A valid string
          */
-        public Context process(Context context);
+        Context process(Context context);
     }
 }

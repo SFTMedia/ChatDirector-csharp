@@ -1,6 +1,17 @@
+#if Serializer_YamlDotNet
+#if Serializer_Newtonsoft
+using Woah_there_tiger_you_can__t_have_both_YamlDotNet_and_Newtonsoft_pick_one;
+#endif
+#endif
 using System.IO;
+#if Serializer_YamlDotNet
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
+#elif Serializer_Newtonsoft
+using Newtonsoft.Json;
+using System.Text;
+using Newtonsoft.Json.Serialization;
+#endif
 using System;
 using System.Collections.Generic;
 namespace ChatDirector.core
@@ -15,20 +26,74 @@ namespace ChatDirector.core
         {
             this.rawData = rawData;
         }
-        public ChatDirector()
+        ChatDirector()
         {
             config = new Configuration();
             instance = this;
-            rawData = File.ReadAllText("config.yml");
         }
+#if Serializer_Newtonsoft
+        public class SnakeCaseContractResolver : DefaultContractResolver
+    {
+        protected override string ResolvePropertyName(string propertyName)
+        {
+            // https://stackoverflow.com/questions/63055621/c-sharp-convert-camel-case-to-snake-case-with-two-capitals-next-to-each-other
+            if(propertyName == null) {
+                throw new ArgumentNullException(nameof(propertyName));
+            }
+            if(propertyName.Length < 2) {
+                return propertyName;
+            }
+            var sb = new StringBuilder();
+            sb.Append(char.ToLowerInvariant(propertyName[0]));
+            for(int i = 1; i < propertyName.Length; ++i) {
+                char c = propertyName[i];
+                if(char.IsUpper(c)) {
+                    sb.Append('_');
+                    sb.Append(char.ToLowerInvariant(c));
+                } else {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString();
+        }
+    }
+        public ChatDirector(object obj) : this()
+        {
+            // Convert it to JSON then pass as rawdata
+            var serializer = getSerializer();
+            var stringWriter = new StringWriter();
+            serializer.Serialize(stringWriter, obj);
+            this.rawData = stringWriter.ToString();
+            Console.WriteLine("Raw data: " + rawData);
+            Console.WriteLine("obj: " + obj);
+        }
+        JsonSerializer getSerializer() {
+             var contractResolver = new SnakeCaseContractResolver();
+             var serializerSettings = new JsonSerializerSettings();
+             serializerSettings.ContractResolver = contractResolver;
+             var serializer = JsonSerializer.Create(serializerSettings);
+             serializer.Converters.Add(new EchoItem.Converter());
+             serializer.Converters.Add(new Chain.Converter());
+             serializer.Converters.Add(new Configuration.Converter());
+             return serializer;
+        }
+#endif
         public bool loadConfig()
         {
+#if Serializer_YamlDotNet
             var deserializer = new DeserializerBuilder().WithNamingConvention(HyphenatedNamingConvention.Instance).Build();
+#elif Serializer_Newtonsoft
+            var deserializer = getSerializer();
+#endif
             try
             {
                 if (rawData != null)
                 {
+#if Serializer_YamlDotNet
                     configStaging = deserializer.Deserialize<Configuration>(rawData);
+#elif Serializer_Newtonsoft
+                    configStaging = deserializer.Deserialize<Configuration>(new JsonTextReader(new StringReader(rawData)));
+#endif
                 }
                 else
                 {

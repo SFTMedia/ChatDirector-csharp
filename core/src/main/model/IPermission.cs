@@ -2,8 +2,8 @@ namespace ChatDirector.core
 {
     public interface IPermission
     {
-        public string getPrefix(string playerName);
-        public string getSuffix(string playerName);
-        public string getGroup(string playerName);
+        string getPrefix(string playerName);
+        string getSuffix(string playerName);
+        string getGroup(string playerName);
     }
 }

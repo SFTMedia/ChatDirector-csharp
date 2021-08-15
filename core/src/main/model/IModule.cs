@@ -4,8 +4,8 @@ namespace ChatDirector.core
 {
     public interface IModule : ILoadable, IValid
     {
-        public List<string> getItemNames();
-        public Type getItemClass(string type);
-        public Context getContext(object obj);
+        List<string> getItemNames();
+        Type getItemClass(string type);
+        Context getContext(object obj);
     }
 }
