@@ -14,21 +14,14 @@ namespace Oxide.Plugins
         {
             // Hope that The directory is set correctly for config.yml in the root
             this.LoadConfig();
-	    /*if (!this.HasConfig) {
-		Console.WriteLine("[ChatDirector] No config, cowardly refusing to load.");
-		return;
-            }*/
+            /*if (!this.HasConfig) {
+            Console.WriteLine("[ChatDirector] No config, cowardly refusing to load.");
+            return;
+                }*/
 
             var config = Config.ReadObject<Configuration>();
-	    Console.WriteLine(config);
             instance = new Oxide.Ext.ChatDirector.core.ChatDirector("{\"debug\":true,\"chains\":{\"example\":[{\"rust-input\":{\"chat\":true,\"server_started\":true,\"server_stopped\":true,\"login\":true,\"logout\":true},\"echo\":\"Hello world\"}]}}");
-	    instance.load();
-	    foreach (var pair in instance.getChains()) {
-		    Console.WriteLine(pair.Key);
-		    Console.WriteLine(pair.Value);
-		    Console.WriteLine("test");
-	    }
-	    Console.WriteLine("te");
+            instance.load();
             itemDaemon = (RustInputItemDaemon)instance.getOrCreateDaemon(typeof(RustInputItemDaemon));
         }
 
