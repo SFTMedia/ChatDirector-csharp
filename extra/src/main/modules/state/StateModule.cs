@@ -2,7 +2,7 @@ using ChatDirector.core;
 using System;
 using System.Collections.Generic;
 
-namespace ChatDirector.state
+namespace ChatDirector.extra
 {
     public class StateModule : IModule
     {

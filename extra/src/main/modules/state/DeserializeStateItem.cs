@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System;
 
-namespace ChatDirector.state
+namespace ChatDirector.extra
 {
     public class DeserializeStateItem : IItem
     {
