@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\core\ChatDirector-core.csproj" />
+    <ProjectReference Include="..\core\ChatDirector-core.csproj">
+      <Properties>DefineConstants=Serializer_YamlDotNet</Properties>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <OutputType>Exe</OutputType>
