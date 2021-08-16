@@ -138,6 +138,18 @@ namespace ChatDirector.core
                     Console.WriteLine("daemon " + daemon.GetType() + " " + daemon + " failed to load.");
                     return false;
                 }
+                // Load all items into their respecting daemons
+                if (typeof(IDaemon).IsAssignableFrom(daemon.GetType())) {
+                    foreach (var chain in this.chains)
+                    {
+                        foreach (var item in chain.Value.getItems())
+                        {
+                            if (item.GetType() == ((IDaemon)daemon).getItemType()) {
+                                ((IDaemon)daemon).addItem(item);
+                            }
+                        }
+                    }
+                }
             }
             return true;
         }

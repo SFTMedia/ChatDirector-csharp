@@ -74,5 +74,10 @@ public void addItem(IItem item)
 {
     pendingItems.Add((MQTTInputItem)item);
 }
+
+        public Type getItemType()
+        {
+            return typeof(MQTTInputItem);
+        }
     }
 }

@@ -14,9 +14,8 @@ namespace Oxide.Ext.RustChatDirector
 
         public RustInputItem()
         {
-            Console.WriteLine("(DEBUG) registering...");
-            ((RustInputItemDaemon)ChatDirector.core.ChatDirector.getConfigStaging().getOrCreateDaemon(typeof(RustInputItemDaemon))).addItem(this);
-            Console.WriteLine("(DEBUG) did register?" + ((RustInputItemDaemon)ChatDirector.core.ChatDirector.getConfigStaging().getOrCreateDaemon(typeof(RustInputItemDaemon))).items.ContainsKey(InputTypes.ServerStarted));        
+            // Create the appropriate daemon, ChatDirector will search through the items and add them to the store later.
+            ChatDirector.core.ChatDirector.getConfigStaging().getOrCreateDaemon(typeof(RustInputItemDaemon));
         }
 
         public bool isValid()

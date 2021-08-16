@@ -1,7 +1,7 @@
 using ChatDirector.core;
 using ChatDirectorMain = ChatDirector.core.ChatDirector;
 using System.Collections.Generic;
-
+using System;
 
 namespace Oxide.Ext.RustChatDirector
 {
@@ -156,6 +156,11 @@ namespace Oxide.Ext.RustChatDirector
                     ChatDirectorMain.run(item, context, true);
                 }
             }
+        }
+
+        public Type getItemType()
+        {
+            return typeof(RustInputItem);
         }
     }
 }

@@ -65,6 +65,9 @@ namespace ChatDirector.core
         {
             foreach (var item in context)
             {
+                if (this.ContainsKey(item.Key)) {
+                    this.Remove(item.Key);
+                }
                 this.Add(item.Key, item.Value);
             }
             this.shouldHalt = context.isHalt();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 namespace ChatDirector.core
 {
@@ -21,5 +22,7 @@ namespace ChatDirector.core
         {
             return items;
         }
+
+        public abstract Type getItemType();
     }
 }
