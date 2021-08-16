@@ -59,6 +59,13 @@ namespace ChatDirector.core
         {
             modules = createModules(getModuleTypes());
         }
+        public void addModule(IModule module)
+        {
+            // No need to add a duplicate module.
+            if(!this.modules.Contains(module)) {
+                this.modules.Add(module);
+            }
+        }
         // https://stackoverflow.com/questions/58102069/how-to-do-a-partial-deserialization-with-jackson#58102226
         public bool load()
         {
