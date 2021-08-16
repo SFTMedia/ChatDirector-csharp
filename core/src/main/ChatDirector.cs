@@ -115,6 +115,12 @@ namespace ChatDirector.core
             }
             return true;
         }
+        public static void addModule(IModule module)
+        {
+            // Add to both staging config and current
+            getConfig().addModule(module);
+            getConfigStaging().addModule(module);
+        }
         public bool load()
         {
             // Load config
