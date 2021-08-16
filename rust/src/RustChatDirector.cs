@@ -21,6 +21,9 @@ namespace Oxide.Plugins
 
             var config = Config.ReadObject<Configuration>();
             instance = new ChatDirector.core.ChatDirector("{\"debug\":true,\"chains\":{\"example\":[{\"rust-input\":{\"chat\":true,\"server_started\":true,\"server_stopped\":true,\"login\":true,\"logout\":true},\"echo\":\"Hello world\"}]}}");
+            ChatDirector.core.ChatDirector.addModule(new ChatDirector.core.ConsoleModule());
+            ChatDirector.core.ChatDirector.addModule(new ChatDirector.extra.MQTTModule());
+            ChatDirector.core.ChatDirector.addModule(new ChatDirector.extra.StateModule());
             instance.load();
             itemDaemon = (RustInputItemDaemon)instance.getOrCreateDaemon(typeof(RustInputItemDaemon));
         }
