@@ -43,6 +43,9 @@
       <HintPath>RustDedicated_Data/Managed/Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="11.2.1" />
+  </ItemGroup>
   <!--
   <ItemGroup>
     <PackageReference Include="M2MqttDotnetCore" Version="1.1.0" />

@@ -9,6 +9,8 @@
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\core\ChatDirector-core.csproj" />
+    <ProjectReference Include="..\core\ChatDirector-core.csproj">
+      <Properties>DefineConstants=Serializer_YamlDotNet</Properties>
+    </ProjectReference>
   </ItemGroup>
 </Project>
