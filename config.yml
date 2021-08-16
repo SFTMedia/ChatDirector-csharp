@@ -25,6 +25,9 @@ chains:
         logout: true
         server_started: true
         server_stopped: true
+  console:
+    # Outputs CURRENT
+    - console-output
 module_data:
   mqtt:
     my_connection: ""
