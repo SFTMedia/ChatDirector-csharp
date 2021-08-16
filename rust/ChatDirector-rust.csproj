@@ -13,11 +13,12 @@
       <Properties>DefineConstants=Serializer_Newtonsoft</Properties>
     </ProjectReference>
   </ItemGroup>
+  <!--
   <ItemGroup>
     <ProjectReference Include="..\extra\ChatDirector-extra.csproj">
       <Properties>DefineConstants=Serializer_Newtonsoft</Properties>
     </ProjectReference>
-  </ItemGroup>
+  </ItemGroup>-->
   <ItemGroup>
     <Reference Include="Assembly-CSharp.dll">
       <HintPath>RustDedicated_Data/Managed/Assembly-CSharp.dll</HintPath>
@@ -43,12 +44,12 @@
       <HintPath>RustDedicated_Data/Managed/Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <!--
   <ItemGroup>
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
-  <!--
   <ItemGroup>
-    <PackageReference Include="M2MqttDotnetCore" Version="1.1.0" />
+    <PackageReference Include="M2MqttDotnetCore" />
   </ItemGroup>
-  -->
+-->
 </Project>
